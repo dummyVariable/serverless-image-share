@@ -8,8 +8,12 @@ from app.auth.forms import LoginForm, RegisterForm
 def login():
     pass
 
-@auth.route('/register', methods=['POST','GET'])
-def register():
+@auth.route('/sign-up', methods=['POST','GET'])
+def sign_up():
+    pass
+
+@auth.route('/confirm-sign-up', methods=['POST','GET'])
+def confirm_sign_up():
     pass
 
 @auth.route('/logout')
