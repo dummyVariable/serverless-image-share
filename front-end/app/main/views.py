@@ -3,12 +3,23 @@ from flask import render_template, redirect
 
 from app.main import main
 from .forms import PostForm
-from app.models import Post, User, db
+
+'''
+image = {
+    'title',
+    'user',
+    'url',
+    'fullUrl',
+    'tags',
+    'date'
+}
+'''
 
 
 @main.route('/')
 def index():
-    pass
+    images = None # function to fetch all images
+    return render_template("index.html", images=images)
 
 @main.route('/post', methods=['GET', 'POST'])
 def post():

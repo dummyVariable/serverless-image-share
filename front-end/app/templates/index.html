@@ -1,18 +1,18 @@
 {% extends 'base.html' %}
 
 {% block content %}
-   <div class="container home">
-   {% if posts %}
-      {% for post in posts%}
-      <div class="containter post rounded-lg border-bottom">
-         <h2 class="post-title">{{post.title}}</h2>
-         <h4 class="post-body">{{post.body}}</h4>
-         <h4 class="post-details">at {{post.pubdate.replace(microsecond=0)}} by {{post.user|capitalize}}</h4>
+   <div class="container container-grid home">
+   {% if images %}
+      {% for image in images%}
+      <div class="image rounded-lg border-bottom">
+         <h2 class="image-title">{{image.title}}</h2>
+         <a href="{{image.fullUrl}}"><img class="image-url" src="{{image.url}}" width="300px" height="300px">Image</img></a>
+         <h4 class="image-user">by {{image.user|capitalize}}</h4>
       </div>
       {%endfor%}
    {% else %}
    <div class="container">
-      <h3>No posts</h3>
+      <h3>No images</h3>
    </div>
    {% endif %} 
    </div>
