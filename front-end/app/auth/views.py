@@ -1,12 +1,17 @@
 from flask import render_template, redirect, flash, url_for
 
 from app.auth import auth
-from app.auth.forms import LoginForm, RegisterForm
+from app.auth.forms import LoginForm, SignUpForm, ConfirmSignUpForm
 
 
 @auth.route('/login', methods=['POST','GET'])
 def login():
-    pass
+    form = LoginForm()
+    
+    if form.validate_on_submit():
+        return redirect(url_for('main.index'))
+
+    return render_template('/auth/login.html', form=form)
 
 @auth.route('/sign-up', methods=['POST','GET'])
 def sign_up():
