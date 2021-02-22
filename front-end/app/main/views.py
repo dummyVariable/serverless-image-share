@@ -1,5 +1,5 @@
 
-from flask import render_template, redirect, url_for
+from flask import render_template, redirect, url_for, request
 
 from app.main import main
 from .forms import UploadForm
@@ -34,3 +34,9 @@ def upload():
         ## upload ops
         return redirect(url_for('main.index'))
     return render_template('upload.html', form=form)
+
+@main.route('/search')
+def search():
+    tag = request.args.get('search')
+    data = None # function for searching the tag
+    return render_template('index.html', data=data)
