@@ -2,8 +2,8 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, TextAreaField, SubmitField
 from wtforms.validators import DataRequired
 
-class PostForm(FlaskForm):
+class UploadForm(FlaskForm):
 
     title = StringField('Title', validators=[DataRequired()])
-    body = TextAreaField('Body', validators=[DataRequired()])
-    sumbit = SubmitField('Post')
+    image = TextAreaField('Image', validators=[DataRequired()])
+    sumbit = SubmitField('Upload')

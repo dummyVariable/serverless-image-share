@@ -1,0 +1,19 @@
+{% extends 'base.html'%}
+{% import "bootstrap/wtf.html" as wtf%}
+
+{% block content %}
+<div class="upload-form">
+<form method='POST' enctype="multipart/form-data">
+    {{form.hidden_tag()}}
+    <div class="form-group">
+      <label for="title">Title</label>
+      {{ form.title(id="title", class="form-control") }}
+    </div>
+    <div class="form-group">
+      <label for="image">image</label>
+      {{ form.image(id="image", class="form-control")}}
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</div>
+{% endblock %}
