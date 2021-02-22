@@ -18,18 +18,18 @@ def sign_up():
     form = SignUpForm()
     
     if form.validate_on_submit():
-        return redirect(url_for('main.index'))
+        return redirect(url_for('auth.confirm_sign_up'))
 
     return render_template('/auth/sign-up.html', form=form)
 
 @auth.route('/confirm-sign-up', methods=['POST','GET'])
 def confirm_sign_up():
-    form = LoginForm()
+    form = ConfirmSignUpForm()
     
     if form.validate_on_submit():
         return redirect(url_for('main.index'))
 
-    return render_template('/auth/login.html', form=form)
+    return render_template('/auth/confirm-sign-up.html', form=form)
 
 
 @auth.route('/logout')
