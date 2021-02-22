@@ -10,6 +10,7 @@ image = {
     'user',
     'url',
     'fullUrl',
+    'orgUrl',
     'tags',
     'date'
 }
@@ -21,6 +22,7 @@ def index():
     images = None # function to fetch all images
     return render_template("index.html", images=images)
 
-@main.route('/post', methods=['GET', 'POST'])
-def post():
-    pass
+@main.route('/image/<id>', methods=['GET', 'POST'])
+def post(id):
+    image = None # function to fetch the image with id
+    return render_template('image.html', image=image)
