@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+   <div class="container home">
+   {% if posts %}
+      {% for post in posts%}
+      <div class="containter post rounded-lg border-bottom">
+         <h2 class="post-title">{{post.title}}</h2>
+         <h4 class="post-body">{{post.body}}</h4>
+         <h4 class="post-details">at {{post.pubdate.replace(microsecond=0)}} by {{post.user|capitalize}}</h4>
+      </div>
+      {%endfor%}
+   {% else %}
+   <div class="container">
+      <h3>No posts</h3>
+   </div>
+   {% endif %} 
+   </div>
+
+{% endblock %}
