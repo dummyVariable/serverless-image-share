@@ -62,3 +62,8 @@ def set_cookie(token: str):
     resp = make_response(redirect(url_for('main.index')))
     resp.set_cookie('token','value', samesite=None)
     return resp
+
+def delete_cookie():
+    resp = make_response(redirect(url_for('main.index')))
+    resp.set_cookie('token','', expires=0, samesite=None)
+    return resp
