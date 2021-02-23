@@ -62,4 +62,4 @@ def confirm_sign_up():
 
 @auth.route('/logout')
 def logout():
-    delete_cookie()
+    return delete_cookie()
