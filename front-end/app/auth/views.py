@@ -17,7 +17,7 @@ def login():
         if error:
             flash('Invalid username or password, Try again')
             return redirect(url_for('auth.login'))
-        return set_cookie(token)
+        return set_cookie(token, username)
 
     return render_template('/auth/login.html', form=form)
 
