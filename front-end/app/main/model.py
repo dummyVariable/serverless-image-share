@@ -21,3 +21,8 @@ def get_all_images():
     images = requests.get(f'{endpoint}/images')
     return images
 
+def get_image_by_id(id: int):
+    
+    image = requests.get(f'{endpoint}/image/{id}')
+    return image
+
