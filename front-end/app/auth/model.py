@@ -1,4 +1,4 @@
-from flask import make_response, redirect, url_for
+from flask import make_response, redirect, url_for, request
 import requests
 
 endpoint = None # Api-GW endpoint for authentication
@@ -69,3 +69,16 @@ def delete_cookie():
     resp.set_cookie('token','', expires=0, samesite=None)
     resp.set_cookie('username',expires=0, samesite=None)
     return resp
+
+def is_logged():
+    # rewrite to validate the token later
+    if request.cookies.get('token'):
+        return True
+    return False    
+
+def get_user():
+
+    user = request.cookies.get('username')
+    if user:
+        return user
+    return None   
