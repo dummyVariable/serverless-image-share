@@ -1,8 +1,9 @@
+from flask import make_response, redirect, url_for
 import requests
 
 endpoint = None # Api-GW endpoint for authentication
 
-def login(username: str, password: str):
+def login_validation(username: str, password: str):
     
     try:
         resp = requests.post(endpoint, 
@@ -19,3 +20,9 @@ def login(username: str, password: str):
         return resp['token'], False
     
     return None, True
+
+
+def set_cookie(token: str):
+    resp = make_response(redirect(url_for('main.index')))
+    resp.set_cookie('token','value', samesite=None)
+    return resp
