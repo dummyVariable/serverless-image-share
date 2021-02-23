@@ -40,6 +40,24 @@ def sign_up_validation(username: str, password: str, email: str):
     
     return True
 
+def confirm_sign_up_validation(username: str, code: str):
+    
+    try:
+        resp = requests.post(f'{endpoint}/confirm-sign-up', 
+                            data={
+                                username : username, 
+                                code : code
+                            })
+    
+    except Exception as e:
+        print(e)
+        return True
+    
+    if resp['error'] is False:
+        return False
+    
+    return True
+
 def set_cookie(token: str):
     resp = make_response(redirect(url_for('main.index')))
     resp.set_cookie('token','value', samesite=None)
