@@ -26,3 +26,7 @@ def get_image_by_id(id: int):
     image = requests.get(f'{endpoint}/image/{id}')
     return image
 
+def get_image_by_tag(tag: str):
+    
+    images = requests.get(f'{endpoint}/search?tag={tag}')
+    return images
