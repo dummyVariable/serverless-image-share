@@ -3,7 +3,7 @@ from flask import render_template, redirect, url_for, request
 
 from app.main import main
 from app.main.forms import UploadForm
-from app.main.model import save_to_S3, get_all_images, get_image_by_id
+from app.main.model import save_to_S3, get_all_images, get_image_by_id, get_image_by_tag
 '''
 image = {
     'id',
@@ -41,5 +41,5 @@ def upload():
 @main.route('/search')
 def search():
     tag = request.args.get('search')
-    data = None # function for searching the tag
-    return render_template('index.html', data=data)
+    images = get_image_by_tag(tag)
+    return render_template('index.html', images=images)
