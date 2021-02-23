@@ -15,6 +15,7 @@ def login():
 
         token, error = login_validation(username, password)
         if error:
+            flash('Invalid username or password, Try again')
             return redirect(url_for('auth.login'))
         return set_cookie(token)
 
@@ -32,6 +33,7 @@ def sign_up():
         error = sign_up_validation(username, password, email)
 
         if error:
+            flash('Something went wrong, Try again')
             return redirect(url_for('auth.sign_up'))
 
         return redirect(url_for('auth.confirm_sign_up'))
@@ -49,8 +51,9 @@ def confirm_sign_up():
         error = confirm_sign_up_validation(username, str(code))
 
         if error:
+            flash('Invalid details, Try again')
             return redirect(url_for('auth.confirm_sign_up'))
-            
+        flash('You can login now')
         return redirect(url_for('auth.login'))
         
 
