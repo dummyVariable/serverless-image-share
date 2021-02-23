@@ -58,12 +58,14 @@ def confirm_sign_up_validation(username: str, code: str):
     
     return True
 
-def set_cookie(token: str):
+def set_cookie(token: str, username: str):
     resp = make_response(redirect(url_for('main.index')))
-    resp.set_cookie('token','value', samesite=None)
+    resp.set_cookie('username',username, samesite=None)
+    resp.set_cookie('token',token, samesite=None)
     return resp
 
 def delete_cookie():
     resp = make_response(redirect(url_for('main.index')))
     resp.set_cookie('token','', expires=0, samesite=None)
+    resp.set_cookie('username',expires=0, samesite=None)
     return resp
