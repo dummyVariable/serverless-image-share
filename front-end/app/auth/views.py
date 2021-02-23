@@ -2,6 +2,7 @@ from flask import render_template, redirect, flash, url_for
 
 from app.auth import auth
 from app.auth.forms import LoginForm, SignUpForm, ConfirmSignUpForm
+from app.auth.model import login_validation, set_cookie
 
 
 @auth.route('/login', methods=['POST','GET'])
@@ -9,7 +10,13 @@ def login():
     form = LoginForm()
 
     if form.validate_on_submit():
-        return redirect(url_for('main.index'))
+        username = form.username.data
+        password = form.password.data
+
+        token, error = login_validation(username, password)
+        if error:
+            return redirect(url_for('auth.login'))
+        return set_cookie(token)
 
     return render_template('/auth/login.html', form=form)
 
