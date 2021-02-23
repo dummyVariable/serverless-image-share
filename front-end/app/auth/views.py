@@ -2,7 +2,7 @@ from flask import render_template, redirect, flash, url_for
 
 from app.auth import auth
 from app.auth.forms import LoginForm, SignUpForm, ConfirmSignUpForm
-from app.auth.model import login_validation, sign_up_validation, confirm_sign_up_validation, set_cookie
+from app.auth.model import login_validation, sign_up_validation, confirm_sign_up_validation, set_cookie, delete_cookie
 
 
 @auth.route('/login', methods=['POST','GET'])
@@ -62,4 +62,4 @@ def confirm_sign_up():
 
 @auth.route('/logout')
 def logout():
-    pass
+    delete_cookie()
