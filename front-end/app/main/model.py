@@ -1,6 +1,9 @@
 import boto3
+import requests
 
 s3 = boto3.client('s3')
+
+endpoint = None # Api-GW endpoint for fetching image records
 
 def save_to_S3(filename: str, data: bytes):
     
@@ -12,3 +15,9 @@ def save_to_S3(filename: str, data: bytes):
         Bucket = '<BUCKET>',
         Key= f'{user}/{filename}'
     )
+
+def get_all_images():
+    
+    images = requests.get(f'{endpoint}/images')
+    return images
+
