@@ -34,16 +34,17 @@ def image(id: int):
 def upload():
     form = UploadForm()
     if form.validate_on_submit():
-        if not is_logged:
+        if not is_logged():
             flash('Login to upload')
             return redirect(url_for('auth.login'))
-        filename = form.title.data
-        image = form.image.data.read()
-        done = save_to_S3(filename, image)
-        if not done:
-            flash('Something went wrong, Try again')
-            return redirect(url_for('main.upload'))
-        return redirect(url_for('main.index'))
+        else:
+            filename = form.title.data
+            image = form.image.data.read()
+            done = save_to_S3(filename, image)
+            if not done:
+                flash('Something went wrong, Try again')
+                return redirect(url_for('main.upload'))
+            return redirect(url_for('main.index'))
     return render_template('upload.html', form=form)
 
 @main.route('/search')
