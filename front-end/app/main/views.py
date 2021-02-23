@@ -3,7 +3,7 @@ from flask import render_template, redirect, url_for, request
 
 from app.main import main
 from app.main.forms import UploadForm
-from app.main.model import save_to_S3
+from app.main.model import save_to_S3, get_all_images
 '''
 image = {
     'id',
@@ -20,7 +20,7 @@ image = {
 
 @main.route('/')
 def index():
-    images = None # function to fetch all images
+    images = get_all_images()
     return render_template("index.html", images=images)
 
 @main.route('/image/<id>', methods=['GET', 'POST'])
