@@ -1,13 +1,18 @@
 import boto3
 import requests
 
+from app.auth.model import get_user
+
 s3 = boto3.client('s3')
 
 endpoint = None # Api-GW endpoint for fetching image records
 
 def save_to_S3(filename: str, data: bytes):
     
-    user = None #function to fetch username
+    user = get_user()
+
+    if not user:
+        return False
 
     s3.put_object(
         ACL = 'public-read',
@@ -15,6 +20,8 @@ def save_to_S3(filename: str, data: bytes):
         Bucket = '<BUCKET>',
         Key= f'{user}/{filename}'
     )
+    
+    return True
 
 def get_all_images():
     
