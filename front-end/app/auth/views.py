@@ -2,7 +2,7 @@ from flask import render_template, redirect, flash, url_for
 
 from app.auth import auth
 from app.auth.forms import LoginForm, SignUpForm, ConfirmSignUpForm
-from app.auth.model import login_validation, sign_up_validation, set_cookie
+from app.auth.model import login_validation, sign_up_validation, confirm_sign_up_validation, set_cookie
 
 
 @auth.route('/login', methods=['POST','GET'])
@@ -43,7 +43,16 @@ def confirm_sign_up():
     form = ConfirmSignUpForm()
     
     if form.validate_on_submit():
-        return redirect(url_for('main.index'))
+        username = form.username.data
+        code = form.code.data
+        
+        error = confirm_sign_up_validation(username, str(code))
+
+        if error:
+            return redirect(url_for('auth.confirm_sign_up'))
+            
+        return redirect(url_for('auth.login'))
+        
 
     return render_template('/auth/confirm-sign-up.html', form=form)
 
