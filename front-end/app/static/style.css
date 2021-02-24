@@ -2,11 +2,18 @@
     padding : 10px;
 }
 
+.container-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+}
+
 .image{
     background-color: aliceblue;
     padding: 20px;
-    margin-top: 10px;
+    margin: 10px;
     width: auto;
+    display: block;
 }
 
 .upload-form, .login-form, .register-form{
