@@ -6,7 +6,7 @@
       {% for image in images%}
       <div class="image rounded-lg border-bottom">
          <h2 class="image-title">{{image.title}}</h2>
-         <a href="{{image.fullUrl}}"><img class="image-url" src="{{image.url}}" width="300px" height="300px">Image</img></a>
+         <a href="/image/{{image.id}}"><img class="image-url" src="{{image.url}}" width="300px" height="300px">Image</img></a>
          <h4 class="image-user">by {{image.user|capitalize}}</h4>
       </div>
       {%endfor%}
