@@ -25,15 +25,15 @@ def save_to_S3(filename: str, data: bytes):
 
 def get_all_images():
     
-    images = requests.get(f'{endpoint}/images')
-    return images
+    images = requests.get(f'{endpoint}/images').json()
+    return images['data']
 
 def get_image_by_id(id: int):
     
-    image = requests.get(f'{endpoint}/image/{id}')
-    return image
+    image = requests.get(f'{endpoint}/image/{id}').json()
+    return image['data']
 
 def get_image_by_tag(tag: str):
     
-    images = requests.get(f'{endpoint}/search?tag={tag}')
-    return images
+    images = requests.get(f'{endpoint}/search?tag={tag}').json()
+    return images['data']
