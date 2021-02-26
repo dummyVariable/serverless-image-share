@@ -1,7 +1,9 @@
+import os
+
 from flask import make_response, redirect, url_for, request
 import requests
 
-endpoint = None # Api-GW endpoint for authentication
+endpoint = os.environ['AUTH_ENDPOINT']
 
 def login_validation(username: str, password: str):
     

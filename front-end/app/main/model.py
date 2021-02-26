@@ -1,3 +1,5 @@
+import os
+
 import boto3
 import requests
 
@@ -5,7 +7,7 @@ from app.auth.model import get_user
 
 s3 = boto3.client('s3')
 
-endpoint = None # Api-GW endpoint for fetching image records
+endpoint = os.environ['MAIN_ENDPOINT']
 
 def save_to_S3(filename: str, data: bytes):
     
