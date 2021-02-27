@@ -1,4 +1,5 @@
 import os
+import json
 
 from flask import make_response, redirect, url_for, request
 import requests
@@ -9,17 +10,19 @@ def login_validation(username: str, password: str):
     
     try:
         resp = requests.post(f'{endpoint}/login', 
-                            data={
-                                username : username, 
-                                password : password
-                            })
+                            data=json.dumps({
+                                "username" : username, 
+                                "password" : password
+                            })).json()
     
     except Exception as e:
         print(e)
         return None, True
     
-    if resp['error'] is False:
-        return resp['token'], False
+    message = resp['message']
+
+    if not message.get('error'):
+        return message['token'], False
     
     return None, True
 
