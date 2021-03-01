@@ -8,6 +8,7 @@ from app.auth.model import get_user
 s3 = boto3.client('s3')
 
 endpoint = os.environ['MAIN_ENDPOINT']
+bucket = os.environ['BUCKET']
 
 def save_to_S3(filename: str, data: bytes):
     
@@ -20,7 +21,7 @@ def save_to_S3(filename: str, data: bytes):
         ACL = 'public-read',
         Body = data,
         Bucket = '<BUCKET>',
-        Key= f'{user}/{filename}'
+        Key= f'{user}/{filename}.jpg'
     )
     
     return True
