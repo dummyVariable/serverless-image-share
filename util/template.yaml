@@ -1,0 +1,39 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  util
+
+  Sample SAM Template for util
+
+Globals:
+  Function:
+    Timeout: 15
+    MemorySize: 512
+
+Resources:
+  UtilFunction:
+    Type: AWS::Serverless::Function 
+    Properties:
+      CodeUri: util/
+      Handler: app.lambda_handler
+      Runtime: python3.8
+      Environment:
+        Variables:
+          ES_ENDPOINT: 
+          ES_INDEX: 
+          ACCESS_KEY: 
+          SECRET_KEY: 
+      Polices:
+        - AWSLambdaExecute 
+        - Version: '2012-10-17'
+          Statement:
+            - Effect: Allow
+              Action:
+                - cognito-idp:*
+              Resource: '*'      
+
+
+Outputs:
+  UtilFunction:
+    Description: "Hello World Lambda Function ARN"
+    Value: !GetAtt UtilFunction.Arn

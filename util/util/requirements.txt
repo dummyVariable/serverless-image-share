@@ -1,0 +1,4 @@
+requests
+pillow
+elasticsearch
+requests_aws4auth
