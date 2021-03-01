@@ -1,0 +1,79 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  serverless-image-share
+
+  image sharing website
+  
+Globals:
+  Function:
+    Timeout: 3
+    Runtime: python3.8
+
+Resources:
+  GetAllImagesFunction:
+    Type: AWS::Serverless::Function           
+    Properties:
+      CodeUri: get_images/
+      Handler: get_all_images.lambda_handler
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: !Ref ImageTable
+      Events:
+        ImagesApi:
+          Type: Api           
+          Properties:
+            Path: /images/
+            Method: get
+
+  GetByIDFunction:
+    Type: AWS::Serverless::Function 
+    Properties:
+      CodeUri: get_image_by_id/
+      Handler: get_image_by_id.lambda_handler
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: !Ref ImageTable
+      Events:
+        ImagesApi:
+          Type: Api           
+          Properties:
+            Path: /image/{id}
+            Method: get     
+
+  GetByTagFunction:
+    Type: AWS::Serverless::Function 
+    Properties:
+      CodeUri: get_images_by_tag/
+      Handler: get_images_by_tag.lambda_handler
+      Events:
+        ImagesApi:
+          Type: Api           
+          Properties:
+            Path: /search
+            Method: get     
+      Environment:
+        Variables:
+          ES_ENDPOINT: 
+          ES_INDEX: 
+	        ACCESS_KEY:
+          SECRET_KEY:
+
+
+  ImageTable:
+    Type: AWS::Serverless::SimpleTable
+    Properties:
+      PrimaryKey:
+        Name: id
+        Type: String
+      TableName: ImageTable
+      ProvisionedThroughput:
+        ReadCapacityUnits: 5
+        WriteCapacityUnits: 5
+
+
+Outputs:
+  ImagesApi:
+    Description: "API Gateway endpoint URL for Prod stage for Main-API"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/"
+
