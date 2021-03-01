@@ -31,15 +31,15 @@ def sign_up_validation(username: str, password: str, email: str):
     try:
         resp = requests.post(f'{endpoint}/sign-up', 
                             data=json.dumps({
-                                username : username, 
-                                password : password,
-                                email : email
-                            }))
+                                "username" : username, 
+                                "password" : password,
+                                "email" : email
+                            })).json()
     
     except Exception as e:
         print(e)
         return True
-    
+
     message = resp['message']
     
     if not message.get('error'):
@@ -52,9 +52,9 @@ def confirm_sign_up_validation(username: str, code: str):
     try:
         resp = requests.post(f'{endpoint}/confirm-sign-up', 
                             data=json.dumps({
-                                username : username, 
-                                code : code
-                            }))
+                                "username" : username, 
+                                "code" : code
+                            })).json()
     
     except Exception as e:
         print(e)
