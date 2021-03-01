@@ -21,7 +21,7 @@ def save_to_S3(filename: str, data: bytes):
         ACL = 'public-read',
         Body = data,
         Bucket = '<BUCKET>',
-        Key= f'{user}/{filename}.jpg'
+        Key= f'full/{user}/{filename}.jpg'
     )
     
     return True
