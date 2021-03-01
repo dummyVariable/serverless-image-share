@@ -18,10 +18,14 @@ def login_validation(username: str, password: str):
     except Exception as e:
         print(e)
         return None, True
-    
-    message = resp['message']
+    error = resp['message']['error']
 
-    if not message.get('error'):
+    if error:
+        return None, True
+
+    message = resp['message']['message']
+
+    if message.get('token'):
         return message['token'], False
     
     return None, True
@@ -39,7 +43,7 @@ def sign_up_validation(username: str, password: str, email: str):
     except Exception as e:
         print(e)
         return True
-
+    
     message = resp['message']
     
     if not message.get('error'):
