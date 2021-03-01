@@ -13,7 +13,6 @@ image = {
     'user',
     'url',
     'fullUrl',
-    'orgUrl',
     'tags',
     'date'
 }
@@ -25,7 +24,7 @@ def index():
     images = get_all_images()
     return render_template("index.html", images=images)
 
-@main.route('/image/<id>', methods=['GET', 'POST'])
+@main.route('/image/<id>')
 def image(id: int):
     image = get_image_by_id(id)
     return render_template('image.html', image=image)
