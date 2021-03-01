@@ -1,0 +1,64 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  cognito-auth
+
+  Sample SAM Template for cognito-auth
+
+Globals:
+  Function:
+    Timeout: 3
+    CodeUri: authentication/
+    Runtime: python3.8
+    Environment:
+      Variables:
+        CLIENT_ID: 
+        CLIENT_SECRET: 
+        POOL_ID: 
+
+Resources:
+  SignUpFunction:
+    Type: AWS::Serverless::Function 
+    Properties:
+      Handler: app.sign_up_handler
+      Events:
+        AuthApi:
+          Type: Api 
+          Properties:
+            Path: /sign-up
+            Method: post
+
+  ConfirmSignUpFunction:
+    Type: AWS::Serverless::Function 
+    Properties:
+      Handler: app.confirm_sign_up_handler
+      Events:
+        AuthApi:
+          Type: Api 
+          Properties:
+            Path: /confirm-sign-up
+            Method: post
+
+  LoginFunction:
+    Type: AWS::Serverless::Function 
+    Properties:
+      Handler: app.login_handler
+      Policies:
+        - AWSLambdaExecute 
+        - Version: '2012-10-17'
+          Statement:
+            - Effect: Allow
+              Action:
+                - cognito-idp:*
+              Resource: '*'
+      Events:
+        AuthApi:
+          Type: Api 
+          Properties:
+            Path: /login
+            Method: post            
+Outputs:
+
+  AuthApi:
+    Description: "API Gateway endpoint URL for Prod stage for Auth-API"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod//"
