@@ -3,11 +3,17 @@
 
 {% block content %}
 <div class="container home">
+    {% if image %}
     <div class="image image-full rounded-lg border-bottom">
         <h2 class="image-title">{{image.title}}</h2>
-        <img class="image-url" src="{{image.orgUrl}}" width="500px" height="500px">{{image.title}}</img></a>
+        <img class="image-url" src="{{image.fullUrl}}" width="500px" height="500px">{{image.title}}</img></a>
         <h4 class="image-details">by {{image.user|capitalize}}</h4>
-        <a href="{{image.orgUrl}}" download="{{image.title}}.jpg">download</a>
+        <a href="{{image.fullUrl}}" download="{{image.title}}.jpg">download</a>
     </div>
+    {% else %}
+    <div class="container">
+        <h3>Image Not found</h3>
+     </div>
+    {% endif %}
 </div>
 {% endblock %}
