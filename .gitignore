@@ -1,3 +1,11 @@
 venv/
 
 __pycache__/
+
+.aws-sam/
+
+.vscode/
+
+events/
+
+samconfig.toml
