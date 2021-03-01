@@ -38,5 +38,8 @@ def get_image_by_id(id: int):
 
 def get_image_by_tag(tag: str):
     
-    images = requests.get(f'{endpoint}/search?tag={tag}').json()
-    return images['data']
+    result = requests.get(f'{endpoint}/search?tag={tag}').json()
+    images = []
+    for image in result['message']:
+        images.append(image['_source'])
+    return images
