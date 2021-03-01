@@ -9,3 +9,9 @@ __pycache__/
 events/
 
 samconfig.toml
+
+.terraform/
+
+terraform.tfstate
+
+terraform.tfstate.backup
