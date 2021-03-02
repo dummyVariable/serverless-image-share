@@ -61,4 +61,4 @@ Outputs:
 
   AuthApi:
     Description: "API Gateway endpoint URL for Prod stage for Auth-API"
-    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod//"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/"
