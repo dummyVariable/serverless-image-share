@@ -6,8 +6,9 @@
     {% if image %}
     <div class="image image-full rounded-lg border-bottom">
         <h2 class="image-title">{{image.title}}</h2>
-        <img class="image-url" src="{{image.fullUrl}}" width="500px" height="500px">{{image.title}}</img></a>
+        <img class="image-url" src="{{image.fullUrl}}" width="900px" height="900px"></img></a>
         <h4 class="image-details">by {{image.user|capitalize}}</h4>
+        <h6 class="image-tags">{{image.tags}}</h6>
         <a href="{{image.fullUrl}}" download="{{image.title}}.jpg">download</a>
     </div>
     {% else %}
