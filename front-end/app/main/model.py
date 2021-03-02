@@ -20,7 +20,7 @@ def save_to_S3(filename: str, data: bytes):
     s3.put_object(
         ACL = 'public-read',
         Body = data,
-        Bucket = '<BUCKET>',
+        Bucket = bucket,
         Key= f'full/{user}/{filename}.jpg'
     )
     
