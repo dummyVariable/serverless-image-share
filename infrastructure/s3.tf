@@ -31,23 +31,7 @@ resource "aws_lambda_permission" "allow_bucket" {
 
 }
 
-resource "aws_s3_bucket" "sam_bucket" {
-	bucket = "sambucketimageshare"
-}
-
-resource "aws_s3_bucket_public_access_block" "sam_bucket_access" {
-	bucket = aws_s3_bucket.sam_bucket
-
-	block_public_acls = false
-	block_public_policy = false
-}
-
 output "lolserverless_endpoint" {
   description = "S3 domain name"
   value = aws_s3_bucket.lolserverless.bucket_domain_name
-}
-
-output "sam_bucket_endpoint" {
-  description = "SAM bucket domain name"
-  value = aws_s3_bucket.sam_bucket.bucket_domain_name
 }
