@@ -72,6 +72,8 @@ def lambda_handler(event, context):
         key=resized_key,
     )
     obj.put(Body=buffer, ContentType='image/jpeg')
+    obj_acl = s3.ObjectAcl(BUCKET,resized_key)
+    obj_acl.put(ACL='public-read')
 
 ### Get tags using label detection
 

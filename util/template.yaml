@@ -23,14 +23,14 @@ Resources:
           ES_INDEX: 
           ACCESS_KEY: 
           SECRET_KEY: 
-      Polices:
-        - AWSLambdaExecute 
-        - Version: '2012-10-17'
-          Statement:
-            - Effect: Allow
-              Action:
-                - cognito-idp:*
-              Resource: '*'      
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: 
+              ImageTable
+        - S3CrudPolicy:
+            BucketName: 
+              lolserverless
+        - RekognitionDetectOnlyPolicy: {}
 
 
 Outputs:
